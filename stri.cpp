@@ -22,6 +22,23 @@ vector<string> split(const string &line, const char delim)
     ret.push_back(std::move(word));
     return ret;
 }
+
+/*
+ * 标点符号分割字符串
+ * */
+void splitstr(string &line, vector<string> &ret)
+{
+    string::size_type pos = 0;
+    string::size_type spos = 0;
+    while((pos = line.find(',', spos)) != string::npos){
+        string word = line.substr(spos, pos-spos);
+        ret.push_back(std::move(word));
+        spos = pos + 1;
+    }
+    string word = line.substr(spos);
+    ret.push_back(std::move(word));
+}
+
 /*
  * 删除字符串首尾空格
  * */
@@ -44,6 +61,9 @@ void  elima_space(string &line, const char *delim)
 }
 
 
+/*
+ * 删除子串，子串以delim表示
+ * */
 void elima_str(string &line, const char *delim, int n)
 {
     string::size_type pos = 0;
@@ -53,6 +73,9 @@ void elima_str(string &line, const char *delim, int n)
     cout << line << endl;
 }
 
+/*
+ * 提取字符串中的所有整数
+ * */
 vector<int> Num_of_Str(const string &line)
 {
     vector<int> numVec;
