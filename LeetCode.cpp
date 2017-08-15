@@ -16,3 +16,23 @@
         }
         return maxlen;
     }
+/*
+* 最长回文， 使用动态规划DP， 数组dp[j][i]刻画下标索引j到i之间的字符串是否为回文。
+* 如果j==i, 则肯定为回文。如果s[i]=s[j]  分为如下情况： 如果i=j+1, 则也为回文。如果i > j+1, 且s[j+1][i-1]为回文，则s[j][i]为回文
+* len记录最长回文长度
+*/
+    string longestPalindrome(string s) {
+        int dp[s.size()][s.size()] = {0}, left = 0, right = 0, len = 0;
+        for (int i = 0; i < s.size(); ++i) {
+            for (int j = 0; j < i; ++j) {
+                dp[j][i] = (s[i] == s[j] && (i - j < 2 || dp[j + 1][i - 1]));
+                if (dp[j][i] && len < i - j + 1) {
+                    len = i - j + 1;
+                    left = j;
+                    right = i;
+                }
+            }
+            dp[i][i] = 1;
+        }
+        return s.substr(left, right - left + 1);
+    }
