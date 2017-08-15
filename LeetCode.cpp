@@ -1,4 +1,6 @@
-
+/*
+*  在string中找到最长无重复字符的子串。返回该子串长度  DP（O(n）)
+*/
     int lengthOfLongestSubstring(string s) {
        vector<int> dict(256, -1);
         int maxlen = 0;
